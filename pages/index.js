@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import absoluteUrl from 'next-absolute-url'
 import Layout from '../components/layout'
 import Slider from '../components/Slider'
 import ProductList from '../components/ProductList'
@@ -26,8 +27,9 @@ export default function Home({ sneakers }) {
   )
 }
 
-export async function getServerSideProps() {
-  const { data: sneakers } = await axios.get(`${process.env.NEXT_API_URL}/sneakers`)
+export async function getServerSideProps(context) {
+  const { origin } = absoluteUrl(context.req)
+  const { data: sneakers } = await axios.get(`${origin}/api/sneakers`)
 
   return {
     props: {
