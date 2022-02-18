@@ -27,7 +27,7 @@ export default function Home({ sneakers }) {
 }
 
 export async function getServerSideProps() {
-  const { data: sneakers } = await axios.get('http://localhost:3000/api/sneakers')
+  const { data: sneakers } = await axios.get(`${process.env.NEXT_API_URL}/sneakers`)
 
   return {
     props: {
